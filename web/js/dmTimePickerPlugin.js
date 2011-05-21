@@ -39,10 +39,10 @@ function initializeSfWidgetFormTimePicker($context) {
     });    
 };
 
-$(document).ready(function(){
+(function($) {
     var $check = $('#dm_admin_content');
     if ($check.length >0) initializeSfWidgetFormTimePicker($(this)); 
-});
+})(jQuery);
 (function($) {
     $('#dm_page div.dm_widget').bind('dmWidgetLaunch', function() {
         initializeSfWidgetFormTimePicker($(this));        

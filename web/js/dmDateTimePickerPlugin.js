@@ -47,10 +47,10 @@ function initializeSfWidgetFormDateTimePicker($context) {
     $('#ui-datepicker-div').css('display', 'none');
 };
 
-$(document).ready(function(){
+(function($) {
     var $check = $('#dm_admin_content');
     if ($check.length >0) initializeSfWidgetFormDateTimePicker($(this)); 
-});
+})(jQuery);
 (function($) {
     $('#dm_page div.dm_widget').bind('dmWidgetLaunch', function() {
         initializeSfWidgetFormDateTimePicker($(this));        

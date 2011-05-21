@@ -33,6 +33,7 @@ class sfWidgetFormDateTimePicker extends sfWidgetFormDateTime {
         $culture = dmContext::getInstance()->getUser()->getCulture();        
         if (isset ($subcultures[$culture])) $culture = $subcultures[$culture];        
         $javascripts = array();
+        $javascripts[] = 'lib.jquery';
         $javascripts[] = 'lib.ui-core';
         $javascripts[] = 'lib.ui-slider';
         $javascripts[] = 'lib.ui-datepicker';
