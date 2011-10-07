@@ -35,7 +35,6 @@ class sfWidgetFormDatePicker extends sfWidgetFormDate {
         if (isset($subcultures[$culture]))
             $culture = $subcultures[$culture];
         $javascripts = array();
-        $javascripts[] = 'lib.jquery';
         $javascripts[] = 'lib.ui-core';
         $javascripts[] = 'lib.ui-datepicker';
         if ($culture != 'en') {
