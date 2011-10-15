@@ -20,8 +20,9 @@ function initializeSfWidgetFormDateTimePicker($context) {
             else $(this).closest('.sf_admin_form_row').removeClass('dm_row_modified');            
         }).blur(function(){
             $input.change();
-        });        
+        });    
         $(this).find('.button-show-picker').click(function(){
+            
             $input.datetimepicker('show');
         });
         $(this).find('.button-reset-picker').click(function(){
@@ -49,7 +50,7 @@ function initializeSfWidgetFormDateTimePicker($context) {
 
 (function($) {
     var $check = $('#dm_admin_content');
-    if ($check.length >0) initializeSfWidgetFormDateTimePicker($(this)); 
+    if ($check.length >0) initializeSfWidgetFormDateTimePicker(); 
 })(jQuery);
 (function($) {
     $('#dm_page div.dm_widget').bind('dmWidgetLaunch', function() {

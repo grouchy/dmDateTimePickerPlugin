@@ -41,7 +41,7 @@ function initializeSfWidgetFormDatePicker($context) {
 
 (function($) {
     var $check = $('#dm_admin_content');
-    if ($check.length >0) initializeSfWidgetFormDatePicker($(this)); 
+    if ($check.length >0) initializeSfWidgetFormDatePicker(); 
 })(jQuery);
 (function($) {
     $('#dm_page div.dm_widget').bind('dmWidgetLaunch', function() {
