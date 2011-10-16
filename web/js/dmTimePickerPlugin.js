@@ -41,7 +41,7 @@ function initializeSfWidgetFormTimePicker($context) {
 
 (function($) {
     var $check = $('#dm_admin_content');
-    if ($check.length >0) initializeSfWidgetFormTimePicker($(this)); 
+    if ($check.length >0) initializeSfWidgetFormTimePicker(); 
 })(jQuery);
 (function($) {
     $('#dm_page div.dm_widget').bind('dmWidgetLaunch', function() {
