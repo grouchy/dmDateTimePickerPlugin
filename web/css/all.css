@@ -1,0 +1,19 @@
+/* 
+    Document   : dmDateTimePickerPlugin
+    Created on : May 7, 2011, 1:21:46 PM
+    Author     : TheCelavi
+    Version    : 2.0 Alpha
+    Description: Style of the dmDateTimePickerPlugin form widgets
+*/
+
+span.sfWidgetFormDmDatePicker input[type=text].sfWidgetFormDmDatePicker {
+    width: 100px;
+}
+
+span.sfWidgetFormDmTimePicker input[type=text].sfWidgetFormDmTimePicker {
+    width: 100px;
+}
+
+span.sfWidgetFormDmDateTimePicker input[type=text].sfWidgetFormDmDateTimePicker {
+    width: 150px;
+}

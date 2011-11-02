@@ -1,0 +1,11 @@
+js:
+  dmDateTimePickerPlugin: 
+    addOn:                          'jquery-ui-timepicker-addon'
+    datePicker:                     'dmDatePickerPlugin'
+    timePicker:                     'dmTimePickerPlugin'
+    dateTimePicker:                 'dmDateTimePickerPlugin'
+
+css:
+  dmDateTimePickerPlugin:
+    addOn:                          'jquery-ui-timepicker-addon'
+    all:                            'all'

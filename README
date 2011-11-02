@@ -1,3 +1,8 @@
+UPDATE: Now it is implemented as jQuery widget, much better - now it is really concept of UI improvement....
+
+This is Alpha - it is stabile but needs some improvements in term of configurations.
+
+
 dmDateTimePickerPlugin is missing add on for Diem. It provides you with date, time and datetime picker for the mentioned fields.
 
 Where can be used?

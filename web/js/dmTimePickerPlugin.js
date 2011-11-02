@@ -1,55 +1,96 @@
-function initializeSfWidgetFormTimePicker($context) {
-    var $widgets = null;
-    if ($context != undefined) $widgets = $($context.find('.sfWidgetFormTimePicker'));
-    else $widgets = $('.sfWidgetFormTimePicker');
-    $.each($widgets, function(){
-        var initialValue = '';        
-        var $selects = $(this).find('select');
-        var $input = $(this).find('input.inputField').datetimepicker({
-            timeOnly: true            
-        }).change(function(){
-            var date = $input.datetimepicker("getDate");            
-            if (date != null) {                
-                $selects.filter('select[name$="[hour]"]').val(date.getHours());
-                $selects.filter('select[name$="[minute]"]').val(date.getMinutes());                
-            } else $selects.val('');
-            if ($input.val() != initialValue) $(this).closest('.sf_admin_form_row').addClass('dm_row_modified');
-            else $(this).closest('.sf_admin_form_row').removeClass('dm_row_modified');
+;(function($) {
+    var methods = {
+        init: function() {
+            var $this = $(this), data = $this.data('sfWidgetFormDmTimePicker');
+            if (data) return;
             
-        }).blur(function(){
-            $input.change();
-        });        
-        $(this).find('.button-show-picker').click(function(){
-            $input.datetimepicker('show');
-        });
-        $(this).find('.button-reset-picker').click(function(){
-            $input.datetimepicker('setDate',null).val('').change();
-            $input.datetimepicker('hide');
-        });        
-        if ($selects.filter('select[name$="[hour]"]').val() != '') {
-            var date = new Date();
-            date.setHours(
-                    $selects.filter('select[name$="[hour]"]').val(),
-                    $selects.filter('select[name$="[minute]"]').val()
-                );
-            $input.datetimepicker('setDate', date);
-            initialValue = $input.val();
-            $input.change();
-        };
-    });    
-};
+            $this.data('sfWidgetFormDmTimePicker', {
+                target:     $this,
+                hour:       $this.find('select[name$="[hour]"]'),
+                minute:     $this.find('select[name$="[minute]"]'),
+                second:     ($this.find('select[name$="[second]"]').length == 0) ? null : $this.find('select[name$="[second]"]'),
+                picker:     $('<input type="text" class="sfWidgetFormDmTimePicker" />').timepicker({
+                    showSecond: ($this.find('select[name$="[second]"]').length != 0),
+                    onClose: function(dateText, instance) {
+                        methods['serialize'].apply($this,[]);
+                    }
+                }),
+                clear:      '',
+                pick:       '',
+                original:   ''
+            });
+            data = $this.data('sfWidgetFormDmTimePicker');
+            data.original = $this.html();            
+            $this.empty();
+            
+            $this.append(data.picker)            
+            
+            $this.append(data.pick).append(data.clear);
+            
+            var $hidden = $('<span style="display:none;"></span>').append(data.hour).append(data.minute).append(data.second);
+            $this.append($hidden);            
+            
+            methods['deserialize'].apply($this,[]);
+        },
+        deserialize: function() {            
+            var $this = $(this), data = $this.data('sfWidgetFormDmTimePicker');
+            if (data) {
+                if (data.hour.val() == '') return;
+                var date = new Date();
+                date.setHours(data.hour.val(), data.minute.val(), ((data.second == null) ? 0 : data.second.val()));
+                data.picker.datepicker('setDate', date);
+            } else methods['init'].apply($this,[]);
+        },
+        serialize: function() {
+            var $this = $(this), data = $this.data('sfWidgetFormDmTimePicker');
+            if (!data) methods['init'].apply($this,[]);
+            var date = data.picker.datepicker('getDate');
+            if (date == null) {
+                data.hour.val('');
+                data.minute.val('');
+                if (data.second != null) data.second.val('');
+            } else {
+                data.hour.val(date.getHours());
+                data.minute.val(date.getMinutes());
+                if (data.second != null) data.second.val(date.getSeconds());
+            };            
+        },
+        destroy: function() {
+            var $this = $(this), data = $this.data('sfWidgetFormDmTimePicker');
+            if (!data) return;
+            $this.empty();
+            $this.append(data.original);
+            $this.removeData('sfWidgetFormDmTimePicker');
+        }
+    };
+    $.fn.sfWidgetFormDmTimePicker = function(method) {
+        if ( methods[method] ) {
+            return methods[ method ].apply( this, Array.prototype.slice.call( arguments, 1 ));
+        } else if ( typeof method === 'object' || ! method ) {
+            return methods.init.apply( this, arguments );
+        } else {
+            $.error( 'Method ' +  method + ' does not exist on jQuery.sfWidgetFormDmTimePicker' );
+        };  
+    };
+     
+})(jQuery);
 
 (function($) {
-    var $check = $('#dm_admin_content');
-    if ($check.length >0) initializeSfWidgetFormTimePicker(); 
-})(jQuery);
-(function($) {
+    if ($('#dm_admin_content').length >0) {
+        $.each($('#dm_admin_content').find('.sfWidgetFormDmTimePicker'), function(){
+            $(this).sfWidgetFormDmTimePicker();
+        });
+    };
+
     $('#dm_page div.dm_widget').bind('dmWidgetLaunch', function() {
-        initializeSfWidgetFormTimePicker($(this));        
+        $.each($(this).find('.sfWidgetFormDmTimePicker'), function(){
+            $(this).sfWidgetFormDmTimePicker();
+        });       
     });
-})(jQuery);
-(function($) {
+
     $('div.dm.dm_widget_edit_dialog_wrap').live('dmAjaxResponse', function() {
-        initializeSfWidgetFormTimePicker($(this));        
+        $.each($(this).find('.sfWidgetFormDmTimePicker'), function(){
+            $(this).sfWidgetFormDmTimePicker();
+        });       
     });
 })(jQuery);

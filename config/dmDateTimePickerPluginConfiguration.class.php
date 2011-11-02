@@ -10,9 +10,9 @@ class dmDateTimePickerPluginConfiguration extends sfPluginConfiguration {
     }
     
     public function listenToFormGeneratorWidgetSubclassEvent(sfEvent $e, $subclass) {        
-        if ($this->isDateTimePickerColumn($e['column'])) $subclass = 'DateTimePicker';
-        elseif ($this->isTimePickerColumn($e['column'])) $subclass = 'TimePicker';
-        elseif ($this->isDatePickerColumn($e['column'])) $subclass = 'DatePicker';
+        if ($this->isDateTimePickerColumn($e['column'])) $subclass = 'DmDateTimePicker';
+        elseif ($this->isTimePickerColumn($e['column'])) $subclass = 'DmTimePicker';
+        elseif ($this->isDatePickerColumn($e['column'])) $subclass = 'DmDatePicker';
         return $subclass;
     }
 
