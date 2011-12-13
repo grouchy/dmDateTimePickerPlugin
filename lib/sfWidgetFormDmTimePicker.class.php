@@ -25,7 +25,8 @@ class sfWidgetFormDmTimePicker extends sfWidgetFormTime {
     
     public function getJavaScripts() {
         $addJS = array();
-        if ($culture = dmContext::getInstance()->getUser()->getCulture() != 'en') $addJS = array(sprintf('/dmDateTimePickerPlugin/js/i18n/jquery.ui.timepicker-%s.js', $culture));
+        $culture = dmContext::getInstance()->getUser()->getCulture();
+        if ($culture != 'en') $addJS = array(sprintf('/dmDateTimePickerPlugin/js/i18n/jquery.ui.timepicker-%s.js', $culture));
         return array_merge(
                 parent::getJavaScripts(),
                 array(

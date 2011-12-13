@@ -23,7 +23,8 @@ class sfWidgetFormDmDatePicker extends sfWidgetFormDate {
     
     public function getJavaScripts() {
         $addJS = array();
-        if ($culture = dmContext::getInstance()->getUser()->getCulture() != 'en') $addJS = array(sprintf('/dmCorePlugin/lib/jquery-ui/js/i18n/jquery.ui.datepicker-%s.js', $culture));
+        $culture = dmContext::getInstance()->getUser()->getCulture();
+        if ($culture != 'en') $addJS = array(sprintf('/dmCorePlugin/lib/jquery-ui/js/i18n/jquery.ui.datepicker-%s.js', $culture));
         return array_merge(
                 parent::getJavaScripts(),
                 array(
