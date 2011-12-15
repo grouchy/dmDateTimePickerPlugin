@@ -6,6 +6,13 @@
             
             var year = $this.find('select[name$="[year]"]');
             
+            var classes = "";
+            
+            if (year.attr("class") != null )
+            {
+                classes =  year.attr("class");
+            }
+            
             $this.data('sfWidgetFormDmDateTimePicker', {
                 target:     $this,
                 day:        $this.find('select[name$="[day]"]'),
@@ -14,7 +21,7 @@
                 hour:       $this.find('select[name$="[hour]"]'),
                 minute:     $this.find('select[name$="[minute]"]'),
                 second:     ($this.find('select[name$="[second]"]').length == 0) ?  null : $this.find('select[name$="[second]"]'),
-                picker:     $('<input type="text" class="sfWidgetFormDmDateTimePicker" />').datetimepicker({
+                picker:     $('<input type="text" class="sfWidgetFormDmDateTimePicker '+ classes +' " />').datetimepicker({
                     minDate: new Date($('option:first', year).next().val(), 0, 1),
                     maxDate: new Date($('option:last', year).val(), 11, 31),    
                     showSecond: ($this.find('select[name$="[second]"]').length != 0),

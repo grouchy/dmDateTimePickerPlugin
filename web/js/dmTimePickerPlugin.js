@@ -4,12 +4,21 @@
             var $this = $(this), data = $this.data('sfWidgetFormDmTimePicker');
             if (data) return;
             
+            var hour = $this.find('select[name$="[hour]"]');
+            
+            var classes = "";
+            
+            if (hour.attr("class") != null )
+            {
+                classes =  hour.attr("class");
+            }
+            
             $this.data('sfWidgetFormDmTimePicker', {
                 target:     $this,
-                hour:       $this.find('select[name$="[hour]"]'),
+                hour:       hour,
                 minute:     $this.find('select[name$="[minute]"]'),
                 second:     ($this.find('select[name$="[second]"]').length == 0) ? null : $this.find('select[name$="[second]"]'),
-                picker:     $('<input type="text" class="sfWidgetFormDmTimePicker" />').timepicker({
+                picker:     $('<input type="text" class="sfWidgetFormDmTimePicker '+ classes +'" />').timepicker({
                     showSecond: ($this.find('select[name$="[second]"]').length != 0),
                     onClose: function(dateText, instance) {
                         methods['serialize'].apply($this,[]);
