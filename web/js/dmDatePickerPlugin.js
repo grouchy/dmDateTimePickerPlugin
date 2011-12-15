@@ -5,13 +5,19 @@
             if (data) return;
             
             var year = $this.find('select[name$="[year]"]');
+            var classes = "";
+            
+            if (year.attr("class") != null )
+            {
+                classes =  year.attr("class");
+            }
             
             $this.data('sfWidgetFormDmDatePicker', {
                 target:     $this,
                 day:        $this.find('select[name$="[day]"]'),
                 month:      $this.find('select[name$="[month]"]'),
                 year:       year,
-                picker:     $('<input type="text" class="sfWidgetFormDmDatePicker" />').datepicker({
+                picker:     $('<input type="text" class="sfWidgetFormDmDatePicker '+ classes +' " />').datepicker({
                     minDate: new Date($('option:first', year).next().val(), 0, 1),
                     maxDate: new Date($('option:last', year).val(), 11, 31),                    
                     onClose: function(dateText, instance) {
